@@ -36,7 +36,6 @@ public class Util {
                 properties.setProperty("hibernate.use_sql_comments", "true");
                 properties.setProperty("hibernate.show_sql", "true");
                 properties.setProperty("hibernate.format_sql", "true");
-                properties.setProperty("hibernate.hbm2ddl.auto", "update");
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(jm.task.core.jdbc.model.User.class);
         configuration.setProperties(properties);
@@ -48,3 +47,6 @@ public class Util {
         return connection;
     }
 }
+//properties.setProperty("hibernate.hbm2ddl.auto", "update"); - автоматическая генерация схемы БД
+// не нужна в этой задаче,пункт 4 требований к задаче
+//отсутствет логика по откату транзакций в случае исключений в методах при работе с БД (дао).
