@@ -32,9 +32,10 @@ public class UserDaoHibernateImpl implements UserDao {
                     "PRIMARY KEY (id))").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
-
     }
 
     @Override
@@ -44,7 +45,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("DROP TABLE IF EXISTS Users").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 
@@ -55,7 +58,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(new User(name, lastName, age));
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 
@@ -66,7 +71,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.remove(session.find(User.class, id));
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 
@@ -78,7 +85,9 @@ public class UserDaoHibernateImpl implements UserDao {
             userList = session.createQuery("from User order by name").list();
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
         return userList;
     }
@@ -90,7 +99,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createQuery("delete User").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 }
